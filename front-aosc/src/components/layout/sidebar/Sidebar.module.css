@@ -1,0 +1,100 @@
+.sidebarWrapper {
+  position: relative; /* para que la flecha se posicione respecto al sidebar */
+}
+
+.sidebar {
+  width: 22rem;
+  background-color: #1e1e2f;
+  color: white;
+  padding: 1rem 1.5rem;
+  height: 100vh;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.sidebar.collapsed {
+  width: 7rem;
+}
+
+.logo img {
+  width: 14rem;
+  max-width: 100%;
+  display: block;
+  margin: 1rem auto;
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.sidebar.collapsed .logo img {
+  width: 0;       /* desaparece suavemente */
+  opacity: 0;     /* evita que se vea cortado */
+}
+
+.icon {
+  display: inline-block;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.menuItem, .subMenuItem {
+  background: none;
+  border: none;
+  color: white;
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menuItem:hover {
+  background-color: #2c2c3e;
+}
+
+.subMenu {
+  margin-left: 2rem;
+  max-height: 0; /* colapsado */
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+
+.menuItem.open + .subMenu {
+  max-height: 500px; /* suficiente para mostrar todo el contenido */
+}
+
+.subMenuItem {
+  padding: 0.5rem 0;
+}
+
+.subMenuItem:hover {
+  color: #ccc;
+}
+
+.sidebar.collapsed .menuItem span {
+  display: none; /* oculta texto */
+}
+
+.sidebar.collapsed .menuItem {
+  justify-content: center; /* centra icono */
+}
+
+/* Flecha lateral arriba */
+.toggleArrow {
+  position: absolute;
+  top: 10px;           /* posición arriba */
+  right: -25px;        /* ajustar para que quede pegado */
+  width: 40px;         /* ancho del botón */
+  height: 40px;        /* alto del botón */
+  border-radius: 8px;  /* bordes redondeados, no redondo completo */
+  background-color: #1e1e2f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+

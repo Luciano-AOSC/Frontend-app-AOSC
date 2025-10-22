@@ -1,0 +1,18 @@
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkboxInput {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}
+
+.checkboxText {
+  font-size: 14px;
+  color: #333;
+  user-select: none;
+}
