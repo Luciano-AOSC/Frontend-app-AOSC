@@ -1,6 +1,6 @@
 /* Contenedor general del perfil */
 .profileWrapper {
-  max-width: 900px;
+  max-width: 140rem;
   margin: 2rem auto;
   padding: 1rem;
   display: flex;
@@ -81,4 +81,28 @@
   margin-bottom: 0.5rem;
   border-radius: 6px;
   box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: flex-end; /* ubica el botón a la derecha */
+  margin-top: 1.5rem;
+}
+
+.saveButton{
+  width: auto; /* solo ocupa el tamaño del contenido */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.saveButton:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
 }

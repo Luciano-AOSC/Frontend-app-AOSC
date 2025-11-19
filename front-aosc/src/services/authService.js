@@ -1,19 +1,27 @@
 import { apiRequest } from './api';
 
-export const loginUser = (correo, clave) =>
-apiRequest('/auth/login', {
-  method: 'POST',
-  body: JSON.stringify({ login: correo, clave }),
-});
+export const authService = {
+  // Obtener usuario por ID
+  getUsuarioPorId: (id) => apiRequest(`/usuarios/${id}`),
 
-export const forgotPasswordRequest = (email) =>
-apiRequest('/auth/forgot-password', {
-  method: 'POST',
-  body: JSON.stringify({ email: email }),
-});
+  // Iniciar sesión
+  login: (correo, clave) =>
+    apiRequest('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ login: correo, clave }),
+    }),
 
-export const resetPasswordRequest = (token, contrasena) =>
-apiRequest('/auth/reset-password', {
-  method: 'POST',
-  body: JSON.stringify({ token, contrasena }),
-});
+  // Enviar email para recuperar contraseña
+  forgotPassword: (email) =>
+    apiRequest('/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    }),
+
+  // Restablecer contraseña con token
+  resetPassword: (token, contrasena) =>
+    apiRequest('/auth/reset-password', {
+      method: 'POST',
+      body: JSON.stringify({ token, contrasena }),
+    }),
+};

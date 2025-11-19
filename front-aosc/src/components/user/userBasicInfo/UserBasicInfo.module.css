@@ -40,15 +40,15 @@
   background: rgba(0,0,0,0.7);
   border-radius: 50%;
   display: flex;
-  justify-content: center; /* centra horizontal */
-  align-items: center;    /* centra vertical */
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   flex-direction: column;
   transition: opacity 0.2s ease;
 }
 
 .overlayText {
-  margin: 0; /* elimina márgenes por defecto */
+  margin: 0;
   color: white;
   font-size: 1.8rem;
   font-weight: 500;
@@ -61,10 +61,10 @@
 /* Menú flotante sobre la foto */
 .menu {
   position: absolute;
-  top: 70%; /* justo debajo del contenedor de la imagen */
+  top: 70%;
   left: 120%;
   transform: translateX(-50%);
-  background:  #ffffff;
+  background: #ffffff;
   border-radius: 12px;
   padding: 10px 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
@@ -85,6 +85,7 @@
   text-align: left;
   font-weight: 500;
   transition: background 0.2s, transform 0.15s;
+  font-family: var(--menu-options);
 }
 
 .menu button:hover {
@@ -93,12 +94,12 @@
 }
 
 .menu .deleteButton:hover {
-  background-color: #660000; /* rojo oscuro al pasar el mouse */
-  color: #fff; /* texto blanco */
+  background-color: #ecbaba;
+  color: #660000;
   transform: translateY(-1px);
 }
 
-/* ===== Resto del layout ===== */
+/* ===== Layout ===== */
 .section h2 {
   font-size: 1.8rem;
   color: #333;
@@ -122,20 +123,68 @@
   font-weight: 500;
   color: #444;
   gap: 0.2rem;
+  min-height: 120px; /* <-- AJUSTÁ ESTA ALTURA */
 }
 
-.infoGrid input {
-  padding: 0.35rem 0.5rem;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+select.input {
+  width: 100%;
+  padding: 12px 40px 12px 15px; /* igual que .input, con más espacio a la derecha para la flecha */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 15px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 1rem;
   background-color: #fafafa;
-  height: 32px;
-  cursor: not-allowed;
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23004a99' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
 }
 
-.infoGrid input[readonly] {
+select.input:focus {
+  outline: none;
+  border-color: var(--color-primary, #0056b3);
+  box-shadow: 0 0 4px rgba(0, 86, 179, 0.2);
+}
+
+select.input:disabled {
   background-color: #f1f1f1;
   border-color: #ddd;
   color: #555;
+  cursor: not-allowed;
+}
+
+.required{
+  color: #660000;
+}
+
+.error {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin: 2px 0 4px;
+  min-height: 18px; /* evita que el error empuje el input */
+  display: flex;
+  align-items: center;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+label p {
+  margin: 0;
+}
+/* Efecto suave de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -35,6 +35,10 @@ const Header = ({ user }) => {
     navigate('/'); // redirige al login
   };
 
+  const handleProfile = () => {
+    navigate('/dashboard/profile')
+  }
+
   return (
     <header className={styles.header}>
       {/* Usuario */}
@@ -46,7 +50,7 @@ const Header = ({ user }) => {
 
         {openDropdown && (
           <div className={styles.dropdown}>
-            <p className={styles.dropdownItem}>
+            <p className={styles.dropdownItem} onClick={handleProfile}>
               <FaUser size={12} /> Perfil
             </p>
             <p className={styles.dropdownItem} onClick={handleLogout}>

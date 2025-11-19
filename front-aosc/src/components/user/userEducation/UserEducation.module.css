@@ -1,0 +1,165 @@
+.educationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.educationCard {
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 2px 5px rgba(0, 91, 187, 0.1); 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.educationCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 91, 187, 0.15);
+}
+
+.educationTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #004a99;
+  border-bottom: 1px solid #b3d4fc;
+  padding-bottom: 0.5rem;
+}
+
+/* --- Filas de estudio --- */
+.studyRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: flex-end;
+  flex-wrap: nowrap; /* no romper la fila en pantallas grandes */
+}
+
+.inputFieldWrapper {
+  flex: 1;
+}
+
+.inputFieldWrapperFull {
+  flex: 1 1 50%; /* crece pero base del 50% */
+  min-width: 200px; /* evita que se achique demasiado */
+}
+
+.inputFieldWrapperDate {
+  flex: 0 0 150px; /* tamaño fijo para fechas */
+}
+
+.buttonWrapper {
+  flex: 0 0 auto; /* tamaño del botón según contenido */
+  display: flex;
+  align-items: flex-end; /* centrado vertical con inputs */
+}
+
+.viewButton {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 40px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem; /* elimina el margin que lo bajaba */
+}
+
+.viewButton:hover {
+  background-color: #004a99;
+}
+
+/* --- Sección de idiomas --- */
+.languagePillsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.languagePill {
+  background-color: #cce5ff;
+  color: #004a99;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.removePillButton {
+  background: transparent;
+  border: none;
+  color: #004a99;
+  font-weight: bold;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.removePillButton:hover {
+  color: #002f66;
+}
+
+.addPillButton {
+  background-color: transparent;
+  color: #5f5d5d;
+  border: 1px solid #cae1fa;
+  border-radius: 20px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 1.6rem;
+  align-self: center; /* ✅ evita que se estire */
+}
+
+/* --- Botón agregar estudio --- */
+.addButton {
+  max-width: 200px; 
+  width: auto;
+  padding: 0.5rem 1rem;
+  margin: auto 0;
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid #cae1fa;
+  color: #5f5d5d;
+}
+
+.addButton:hover {
+  background-color: transparent;
+  transform: translateY(-2px);
+}
+
+.noData {
+  text-align: center; /* centra el contenido */
+}
+
+.noData p {
+  font-style: italic;
+  color: #888;
+  text-align: left;
+}
+
+.textIdioma{
+  padding: 1.2rem 0.5rem;
+  margin: 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .studyRow {
+    flex-wrap: wrap; /* ahora puede romper la fila */
+  }
+
+  .inputFieldWrapperFull,
+  .inputFieldWrapperDate,
+  .buttonWrapper {
+    flex: 1 1 100%; /* ocupan toda la fila en móvil */
+  }
+
+  .buttonWrapper {
+    justify-content: flex-start; /* alineación del botón */
+    margin-top: 0.5rem;
+  }
+}

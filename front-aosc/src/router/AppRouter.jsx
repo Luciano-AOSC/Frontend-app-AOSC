@@ -16,7 +16,7 @@ function AppRouter() {
 
         {/* Rutas privadas protegidas */}
         <Route element={<PrivateLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,30 +1,54 @@
 import { jwtDecode } from 'jwt-decode';
 import { useState, useEffect } from 'react';
-import { getDatoPersonalByUsuarioId } from '../../services/userService';
+import { datoPersonalService } from '../../services/datoPersonalService';
+import { contactoService } from '../../services/contactoService';
+import { nacimientoService } from '../../services/nacimientoService';
+import { domicilioService } from '../../services/domicilioService';
+import { authService } from '../../services/authService';
 import { useAuth } from '../../hooks/useAuth';
 import UserProfile from '../../components/user/userProfile/UserProfile';
+import Spinner from '../../components/common/spinner/Spinner'; 
 
-const UserProfilePage = () => {
+const UserProfilePage = ({readOnly = true}) => {
   const { token } = useAuth();
-  const [datoPersonal, setDatoPersonal] = useState({}); // objeto vacío por defecto
+  const [datoPersonal, setDatoPersonal] = useState({});
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchDatos = async () => {
-      if (!token || typeof token !== 'string') {
-        console.warn('Token inválido o no disponible');
-        setDatoPersonal({}); // asegurar que la UI se muestre
-        return;
-      }
+      if (!token) return;
 
       try {
-        const decoded = jwtDecode(token);
-        const usuarioId = decoded.id;
+        setLoading(true);
+        const { id: usuarioId } = jwtDecode(token);
 
-        const data = await getDatoPersonalByUsuarioId(usuarioId);
-        setDatoPersonal(data || {}); // datos vacíos si API falla
+        const personal = await datoPersonalService.getByUsuarioId(usuarioId);
+
+        const [telefono, nacimiento, domicilio, email] = await Promise.all([
+          personal.contactoIds?.length
+            ? contactoService.getById(personal.contactoIds[0])
+            : null,
+          personal.nacimientoId
+            ? nacimientoService.getById(personal.nacimientoId)
+            : null,
+          personal.domicilioId
+            ? domicilioService.getById(personal.domicilioId)
+            : null,
+          authService.getUsuarioPorId(personal.usuarioId),
+        ]);
+
+        setDatoPersonal({
+          ...personal,
+          nacimiento,
+          telefono,
+          domicilio,
+          email,
+        });
       } catch (err) {
         console.error('Error al obtener datos del usuario:', err);
-        setDatoPersonal({}); // siempre mostramos UI aunque haya error
+        setDatoPersonal({});
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -34,7 +58,11 @@ const UserProfilePage = () => {
   return (
     <div>
       <h2>Perfil de Usuario</h2>
-      <UserProfile datoPersonal={datoPersonal} readOnly={true} />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <UserProfile datoPersonal={datoPersonal} readOnly={readOnly}/>
+      )}
     </div>
   );
 };

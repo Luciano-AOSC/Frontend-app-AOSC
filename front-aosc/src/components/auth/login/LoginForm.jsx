@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
-import { loginUser } from "../../../services/authService";
+import { authService } from "../../../services/authService";
 import Input from "../../common/inputField/InputField";
 import Button from "../../common/button/Button";
 import Message from "../../common/message/Message"; 
 import Checkbox from "../../common/checkbox/Checkbox";
+import SpinnerOverlay from "../../common/spinner/Spinner"; // ✅ overlay spinner
 import AoscLogo from "../../../assets/img/Aosc-negro.png";
 import styles from "./LoginForm.module.css";
 
@@ -14,31 +15,37 @@ const LoginForm = () => {
   const [clave, setClave] = useState("");
   const [recordarme, setRecordarme] = useState(false);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // ✅ estado spinner
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setLoading(true); // ✅ mostrar overlay
 
     try {
-      const data = await loginUser(correo, clave);
+      const data = await authService.login(correo, clave);
       login(data.jwTtoken, recordarme); 
       navigate("/dashboard");
-    } catch (error) {
-      if (error.message && error.message.includes('No se pudo conectar')) {
+    } catch (err) {
+      if (err.message && err.message.includes('No se pudo conectar')) {
         setError('No se pudo conectar con el servidor. Intenta nuevamente más tarde.');
-      } else if (error.message && !error.message.startsWith('Error')) {
-        setError(error.message); 
+      } else if (err.message && !err.message.startsWith('Error')) {
+        setError(err.message); 
       } else {
         setError('El usuario o la contraseña no son correctos.');
       }
+    } finally {
+      setLoading(false); // ✅ ocultar overlay
     }
   };
 
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginBox}>
+        {loading && <SpinnerOverlay />} {/* ✅ overlay visible mientras loading=true */}
+
         <div className={styles.logoSection}>
           <img src={AoscLogo} alt="logo" />
         </div>
@@ -71,7 +78,10 @@ const LoginForm = () => {
             />
             <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
           </div>
-          <Button type="submit">Iniciar sesión</Button>
+
+          <Button type="submit" disabled={loading}>
+            Iniciar sesión
+          </Button>
         </form>
       </div>
     </div>

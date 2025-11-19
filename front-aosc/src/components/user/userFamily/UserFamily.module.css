@@ -1,0 +1,110 @@
+.section {
+  margin: 2rem 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.familyTable {
+  width: 100%;
+  border-collapse: separate; /* Para bordes redondeados */
+  border-spacing: 0;
+  margin-top: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+  overflow: hidden; /* Para que los bordes redondeados funcionen */
+}
+
+.familyTable th {
+  background-color: rgba(0, 91, 187, 0.1);
+  color: #004a99;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #004a99;
+  text-align: left;
+}
+
+.familyTable td {
+  background-color: #fff;
+  padding: 12px 15px;
+  color: #333;
+  border-bottom: 1px solid #004a99;
+}
+
+.familyTable tr:last-child td {
+  border-bottom: none;
+}
+
+.familyTable tr:hover td {
+  background-color: #f0f7ff;
+  transition: background-color 0.3s;
+}
+
+/* Responsivo: scroll horizontal si no cabe en pantalla */
+.section .tableWrapper {
+  overflow-x: auto;
+  border-radius: 1rem;
+}
+
+/* Mensaje cuando no hay familiares */
+.section p {
+  font-style: italic;
+  color: #888;
+  margin-top: 1rem;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px; /* separación entre botones */
+  justify-content: center; /* centra horizontalmente */
+}
+
+.button {
+  color: #3f3f3f;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  text-align: left;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.15s;
+  font-family: var(--menu-options);
+  background: #f6f5f4;
+}
+
+/* Botón de eliminar */
+.deleteButton:hover {
+  background-color: #ecbaba;
+  color: #660000;
+  transform: translateY(-1px);
+}
+
+.infoButton:hover{
+  color: #fff;
+}
+
+.addButton {
+  max-width: 200px; 
+  width: auto;
+  padding: 0.5rem 1rem;
+  margin: auto 0;
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid #cae1fa;
+  color: #888;
+}
+
+.addButton:hover {
+  background-color: transparent;
+  transform: translateY(-2px);
+}
+
+.noData {
+  text-align: center; /* centra el contenido */
+  margin: 0.5rem 0;
+}
+
+.noData p {
+  font-style: italic;
+  color: #888;
+  text-align: left;
+}
